@@ -9,5 +9,4 @@ public class TaskCreateDTO {
     private String status;
     private String priority;
     private Long assigneeId;
-    private Long authorId;
 }

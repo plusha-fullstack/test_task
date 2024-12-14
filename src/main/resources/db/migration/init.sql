@@ -56,7 +56,3 @@ CREATE TABLE comment (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE INDEX idx_task_author_id ON task(author_id);
-CREATE INDEX idx_task_assignee_id ON task(assignee_id);
-CREATE INDEX idx_comment_task_id ON comment(task_id);

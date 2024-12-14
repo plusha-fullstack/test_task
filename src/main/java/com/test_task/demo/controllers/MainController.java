@@ -1,34 +1,34 @@
-//package com.test_task.demo.controllers;
-//
-//import com.test_task.demo.dtos.*;
-//
-//import com.test_task.demo.services.TaskService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//
-//// this is my controller for task!  lgo ot for now
-//@RestController
-//@RequestMapping("/api/tasks")
-//public class TaskController {
-//
-//    @Autowired
-//    private TaskService taskService;
-//
-//    // Create a task
-//    @PostMapping
-//    public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskCreateDTO taskCreateDTO) {
-//        TaskResponseDTO task = taskService.createTask(taskCreateDTO);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(task);
-//    }
-//
-//    // Update a task
-//    @PutMapping("/{id}")
+package com.test_task.demo.controllers;
+
+import com.test_task.demo.dtos.*;
+import com.test_task.demo.services.TaskService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.List;
+
+// this is alex controller
+@RestController
+@RequiredArgsConstructor
+public class MainController {
+
+    @Autowired
+    private TaskService taskService;
+
+
+    // Create a task
+    @PostMapping("/tasks")
+    public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskCreateDTO taskCreateDTO) {
+        TaskResponseDTO task = taskService.createTask(taskCreateDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(task);
+    }
+
+//    @PutMapping("/tasks/{id}")
 //    public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable Long id, @RequestBody TaskUpdateDTO taskUpdateDTO) {
 //        TaskResponseDTO task = taskService.updateTask(id, taskUpdateDTO);
 //        return ResponseEntity.ok(task);
@@ -94,4 +94,28 @@
 //        List<CommentResponseDTO> comments = taskService.getAllComments(id);
 //        return ResponseEntity.ok(comments);
 //    }
-//}
+
+ // below ALEX CODE
+
+    @GetMapping("/unsecured")
+    public String unsecuredData() {
+        return "Unsecured data";
+    }
+
+    @GetMapping("/secured")
+    public String securedData() {
+        return "Secured data";
+    }
+
+    @GetMapping("/admin")
+    public String adminData() {
+        return "Admin data";
+    }
+
+    // Principal это текущей пользователь в контексте спринг секьюрити
+    @GetMapping("/info")
+    public String userData(Principal principal) {
+        return principal.getName();
+    }
+
+}

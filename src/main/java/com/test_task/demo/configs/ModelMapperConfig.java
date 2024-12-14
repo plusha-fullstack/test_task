@@ -1,4 +1,4 @@
-package com.test_task.demo.config;
+package com.test_task.demo.configs;
 
 
 import org.modelmapper.ModelMapper;
